@@ -31,46 +31,22 @@
         .rating {
             margin-top: 20px;
         }
+        .rating span {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+        .rating span:hover, .rating span.active {
+            color: yellow;
+        }
     </style>
 </head>
 <body>
-    <h1>Fun Games δεν ειναι ολα τα παιχνιδια ειναι μονο 31 μετα απο τισ 8 και 45 το βραδυ θα ειναι ολα γιατι εγεινε ενα λαθακι οποτε μπορεισ να παιξεισ δυστηχοσ μονο αυτα αναφερομαι πιο πολυ στον βασιλη και στον ταξιαρχη     -δημητρης</h1>
+    <h1>Fun Games</h1>
     <input type="text" class="search-bar" id="searchInput" onkeyup="searchGames()" placeholder="Search for games...">
     
     <h2>Main Games</h2>
-    <div id="gamesList">
-        <div class="game"><a href="https://neal.fun/asteroid-launcher/">Asteroid Launcher</a></div>
-        <div class="game"><a href="https://neal.fun/spend/">Spend Bill Gates' Money</a></div>
-        <div class="game"><a href="https://neal.fun/perfect-circle/">Draw a Perfect Circle</a></div>
-        <div class="game"><a href="https://neal.fun/design-the-next-iphone/">Design The Next iPhone</a></div>
-        <div class="game"><a href="https://neal.fun/size-of-space/">Size of Space</a></div>
-        <div class="game"><a href="https://neal.fun/deep-sea/">How Deep is the Ocean?</a></div>
-        <div class="game"><a href="https://neal.fun/password-game/">The Password Game</a></div>
-        <div class="game"><a href="https://neal.fun/logos-from-memory/">Draw Logos from Memory</a></div>
-        <div class="game"><a href="https://neal.fun/where-does-the-day-go/">Where Does Your Day Go?</a></div>
-        <div class="game"><a href="https://neal.fun/absurd-trolley-problems/">Absurd Trolley Problems</a></div>
-        <div class="game"><a href="https://www.roblox.com/home">Roblox</a></div>
-        <div class="game"><a href="https://www.minecraft.net/en-us">Minecraft</a></div>
-        <div class="game"><a href="https://www.stumbleguys.com/">Stumble Guys</a></div>
-        <div class="game"><a href="https://supercell.com/en/games/brawlstars/">Brawl Stars</a></div>
-        <div class="game"><a href="https://www.youtube.com/">YouTube</a></div>
-        <div class="game"><a href="https://amongus.com">Among Us</a></div>
-        <div class="game"><a href="https://poki.com/en/g/subway-surfers">Subway Surfers</a></div>
-        <div class="game"><a href="https://www.rockstargames.com/gta-v">GTA 5</a></div>
-        <div class="game"><a href="https://www.fortnite.com/?lang=en-US">Fortnite</a></div>
-        <div class="game"><a href="https://www.callofduty.com/">Call of Duty</a></div>
-        <div class="game"><a href="https://nba.2k.com/2k25/">NBA 2K25</a></div>
-        <div class="game"><a href="https://www.ea.com/games/ea-sports-fc/fc-25">FIFA 25</a></div>
-        <div class="game"><a href="https://www.letsplayuno.com/">UNO</a></div>
-        <div class="game"><a href="https://ff.garena.com/en">Free Fire</a></div>
-        <div class="game"><a href="https://poki.com/gr/g/vortellis-pizza">Pizza Game</a></div>
-        <div class="game"><a href="https://www.tocaboca.com/">Toca Boca</a></div>
-        <div class="game"><a href="https://playtictactoe.org/">Tic Tac Toe</a></div>
-        <div class="game"><a href="https://now.gg/apps/pazu-games/2767/avatar-world-city-life.html">Avatar World</a></div>
-        <div class="game"><a href="https://raft-game.com/">Raft</a></div>
-        <div class="game"><a href="https://www.sonicthehedgehog.com/">Sonic</a></div>
-        <div class="game"><a href="https://snake.io">Snake.io</a></div>
-    </div>
+    <div id="gamesList"></div>
     
     <h2>Rate This Site</h2>
     <div class="rating">
@@ -78,10 +54,43 @@
         <span onclick="rate(2)">&#9733;</span>
         <span onclick="rate(3)">&#9733;</span>
         <span onclick="rate(4)">&#9733;</span>
-        <span onclick="rate(5)">&#9733;</span>       
+        <span onclick="rate(5)">&#9733;</span>
     </div>
     
     <script>
+        let games = [
+            { name: "Minecraft", url: "https://www.minecraft.net/en-us" },
+            { name: "Fortnite", url: "https://www.fortnite.com/?lang=en-US" },
+            { name: "Roblox", url: "https://www.roblox.com/home" },
+            { name: "Call of Duty", url: "https://www.callofduty.com/" },
+            { name: "FIFA 25", url: "https://www.ea.com/games/ea-sports-fc/fc-25" },
+            { name: "Among Us", url: "https://innersloth.com/gameAmongUs.php" },
+            { name: "Valorant", url: "https://playvalorant.com/" },
+            { name: "League of Legends", url: "https://www.leagueoflegends.com/" },
+            { name: "CS:GO", url: "https://blog.counter-strike.net/" },
+            { name: "GTA V", url: "https://www.rockstargames.com/gta-v" },
+            { name: "UNO", url: "https://www.letsplayuno.com/" },
+            { name: "Free Fire", url: "https://ff.garena.com/en" },
+            { name: "Raft", url: "https://raft-game.com/" },
+            { name: "Sonic", url: "https://www.sonicthehedgehog.com/" },
+            { name: "Pac-Man", url: "https://pacman.com/" },
+            { name: "Tetris", url: "https://tetris.com/" },
+            { name: "Need for Speed", url: "https://www.ea.com/en-gb/games/need-for-speed" },
+            { name: "Gran Turismo 7", url: "https://www.playstation.com/el-gr/games/gran-turismo-7/" },
+            { name: "Fall Guys", url: "https://www.fallguys.com/en-US" },
+            { name: "Rocket League", url: "https://www.rocketleague.com/" }
+        ];
+
+        for (let i = 0; i < 200; i++) {
+            let game = document.createElement("div");
+            game.classList.add("game");
+            let link = document.createElement("a");
+            link.href = games[i % games.length].url;
+            link.textContent = games[i % games.length].name + " " + (i + 1);
+            game.appendChild(link);
+            document.getElementById("gamesList").appendChild(game);
+        }
+
         function searchGames() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let games = document.querySelectorAll('.game');
@@ -94,7 +103,12 @@
             });
         }
         function rate(stars) {
-            alert('You rated this site ' + stars + ' stars!');
+            document.querySelectorAll('.rating span').forEach((star, index) => {
+                star.classList.remove('active');
+                if (index < stars) {
+                    star.classList.add('active');
+                }
+            });
         }
     </script>
 </body>
