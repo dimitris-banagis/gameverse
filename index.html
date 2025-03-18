@@ -22,57 +22,80 @@
             color: #00d1ff;
             text-decoration: none;
         }
+        .search-bar {
+            margin: 20px;
+            padding: 10px;
+            width: 50%;
+            font-size: 16px;
+        }
+        .rating {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Fun Games</h1>
-    <h2>Main Games</h2>
-    <div class="game"><a href="https://neal.fun/asteroid-launcher/">Game 1: Asteroid Launcher</a></div>
-    <div class="game"><a href="https://neal.fun/spend/">Game 2: Spend Bill Gates' Money</a></div>
-    <div class="game"><a href="https://neal.fun/perfect-circle/">Game 3: Draw a Perfect Circle</a></div>
-    <div class="game"><a href="https://neal.fun/design-the-next-iphone/">Game 4: Design The Next iPhone</a></div>
-    <div class="game"><a href="https://neal.fun/size-of-space/">Game 5: Size of Space</a></div>
-    <div class="game"><a href="https://neal.fun/deep-sea/">Game 6: How Deep is the Ocean?</a></div>
-    <div class="game"><a href="https://neal.fun/password-game/">Game 7: The Password Game</a></div>
-    <div class="game"><a href="https://neal.fun/logos-from-memory/">Game 8: Draw Logos from Memory</a></div>
-    <div class="game"><a href="https://neal.fun/where-does-the-day-go/">Game 9: Where Does Your Day Go?</a></div>
-    <div class="game"><a href="https://neal.fun/absurd-trolley-problems/">Game 10: Absurd Trolley Problems</a></div>
-    <div class="game"><a href="https://neal.fun/life-checklist/">Game 11: Life Checklist</a></div>
-    <div class="game"><a href="https://neal.fun/speed/">Game 12: Speed</a></div>
-    <div class="game"><a href="https://neal.fun/who-was-alive/">Game 13: Who Was Alive?</a></div>
-    <div class="game"><a href="https://neal.fun/progress/">Game 14: Progress</a></div>
-    <div class="game"><a href="https://neal.fun/ambient-chaos/">Game 15: Ambient Chaos</a></div>
-    <div class="game"><a href="https://neal.fun/days-since-incident/">Game 16: Days Since Incident</a></div>
-    <div class="game"><a href="https://neal.fun/printing-money/">Game 17: Printing Money</a></div>
-    <div class="game"><a href="https://neal.fun/baby-map/">Game 18: Baby Map</a></div>
-    <div class="game"><a href="https://www.roblox.com/home">Game 19: Roblox</a></div>
-    <div class="game"><a href="https://www.chess.com/">Game 20: Chess</a></div>
-    <div class="game"><a href="https://www.minecraft.net/en-us">Game 21: Minecraft</a></div>
-    <div class="game"><a href="https://www.stumbleguys.com/">Game 22: Stumble Guys</a></div>
-    <div class="game"><a href="https://supercell.com/en/games/brawlstars/">Game 23: Brawl Stars</a></div>
-    <div class="game"><a href="https://www.youtube.com/">Game 24: YouTube</a></div>
-    <div class="game"><a href="https://castle.xyz/">Game 25: Castle</a></div>
-    <div class="game"><a href="https://amongus.com">Game 26: Among Us</a></div>
-    <div class="game"><a href="https://poki.com/en/g/subway-surfers">Game 27: Subway Surfers</a></div>
-    <div class="game"><a href="https://www.rockstargames.com/gta-v">Game 28: GTA 5</a></div>
-    <div class="game"><a href="https://www.fortnite.com/?lang=en-US">Game 29: Fortnite</a></div>
-    <div class="game"><a href="https://www.callofduty.com/">Game 30: Call of Duty</a></div>
-    <div class="game"><a href="https://nba.2k.com/2k25/">Game 31: NBA 2K25</a></div>
-    <div class="game"><a href="https://www.ea.com/games/ea-sports-fc/fc-25">Game 32: FIFA 25</a></div>
+    <h1>Fun Games δεν ειναι ολα τα παιχνιδια ειναι μονο 40 μετα απο τισ 9 το βραδυ θα ειναι ολα</h1>
+    <input type="text" class="search-bar" id="searchInput" onkeyup="searchGames()" placeholder="Search for games...">
     
-    <h2>Extra Games</h2>
-    <div class="game"><a href="https://wordle.website/">Extra 1: Wordle</a></div>
-    <div class="game"><a href="https://www.geoguessr.com/">Extra 2: GeoGuessr</a></div>
-    <div class="game"><a href="https://www.sporcle.com/">Extra 3: Sporcle</a></div>
-    <div class="game"><a href="https://www.typingclub.com/">Extra 4: Typing Club</a></div>
-    <div class="game"><a href="https://www.coolmathgames.com/">Extra 5: Cool Math Games</a></div>
-    <div class="game"><a href="https://store.steampowered.com/app/105600/Terraria/">Extra 6: Terraria</a></div>
-    <div class="game"><a href="https://krunker.io/">Extra 7: Krunker</a></div>
-    <div class="game"><a href="https://www.pokemon.com/us/pokemon-tcg/play-online/">Extra 8: Pokémon TCG Online</a></div>
-    <div class="game"><a href="https://www.duolingo.com/">Extra 9: Duolingo</a></div>
-    <div class="game"><a href="https://brainlify.ai/el/iq">Extra 10: IQ Test</a></div>
-    <div class="game"><a href="https://https://neal.fun/space-elevator"space elevator 30 VISITS REWARD!!!</a></a>div>
-    <h2>Space Elevator</h2>
-
+    <h2>Main Games</h2>
+    <div id="gamesList">
+        <div class="game"><a href="https://neal.fun/asteroid-launcher/">Asteroid Launcher</a></div>
+        <div class="game"><a href="https://neal.fun/spend/">Spend Bill Gates' Money</a></div>
+        <div class="game"><a href="https://neal.fun/perfect-circle/">Draw a Perfect Circle</a></div>
+        <div class="game"><a href="https://neal.fun/design-the-next-iphone/">Design The Next iPhone</a></div>
+        <div class="game"><a href="https://neal.fun/size-of-space/">Size of Space</a></div>
+        <div class="game"><a href="https://neal.fun/deep-sea/">How Deep is the Ocean?</a></div>
+        <div class="game"><a href="https://neal.fun/password-game/">The Password Game</a></div>
+        <div class="game"><a href="https://neal.fun/logos-from-memory/">Draw Logos from Memory</a></div>
+        <div class="game"><a href="https://neal.fun/where-does-the-day-go/">Where Does Your Day Go?</a></div>
+        <div class="game"><a href="https://neal.fun/absurd-trolley-problems/">Absurd Trolley Problems</a></div>
+        <div class="game"><a href="https://www.roblox.com/home">Roblox</a></div>
+        <div class="game"><a href="https://www.minecraft.net/en-us">Minecraft</a></div>
+        <div class="game"><a href="https://www.stumbleguys.com/">Stumble Guys</a></div>
+        <div class="game"><a href="https://supercell.com/en/games/brawlstars/">Brawl Stars</a></div>
+        <div class="game"><a href="https://www.youtube.com/">YouTube</a></div>
+        <div class="game"><a href="https://amongus.com">Among Us</a></div>
+        <div class="game"><a href="https://poki.com/en/g/subway-surfers">Subway Surfers</a></div>
+        <div class="game"><a href="https://www.rockstargames.com/gta-v">GTA 5</a></div>
+        <div class="game"><a href="https://www.fortnite.com/?lang=en-US">Fortnite</a></div>
+        <div class="game"><a href="https://www.callofduty.com/">Call of Duty</a></div>
+        <div class="game"><a href="https://nba.2k.com/2k25/">NBA 2K25</a></div>
+        <div class="game"><a href="https://www.ea.com/games/ea-sports-fc/fc-25">FIFA 25</a></div>
+        <div class="game"><a href="https://www.letsplayuno.com/">UNO</a></div>
+        <div class="game"><a href="https://ff.garena.com/en">Free Fire</a></div>
+        <div class="game"><a href="https://poki.com/gr/g/vortellis-pizza">Pizza Game</a></div>
+        <div class="game"><a href="https://www.tocaboca.com/">Toca Boca</a></div>
+        <div class="game"><a href="https://playtictactoe.org/">Tic Tac Toe</a></div>
+        <div class="game"><a href="https://now.gg/apps/pazu-games/2767/avatar-world-city-life.html">Avatar World</a></div>
+        <div class="game"><a href="https://raft-game.com/">Raft</a></div>
+        <div class="game"><a href="https://www.sonicthehedgehog.com/">Sonic</a></div>
+        <div class="game"><a href="https://snake.io">Snake.io</a></div>
+    </div>
+    
+    <h2>Rate This Site</h2>
+    <div class="rating">
+        <span onclick="rate(1)">&#9733;</span>
+        <span onclick="rate(2)">&#9733;</span>
+        <span onclick="rate(3)">&#9733;</span>
+        <span onclick="rate(4)">&#9733;</span>
+        <span onclick="rate(5)">&#9733;</span>       
+    </div>
+    
+    <script>
+        function searchGames() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let games = document.querySelectorAll('.game');
+            games.forEach(game => {
+                if (game.innerText.toLowerCase().includes(input)) {
+                    game.style.display = 'inline-block';
+                } else {
+                    game.style.display = 'none';
+                }
+            });
+        }
+        function rate(stars) {
+            alert('You rated this site ' + stars + ' stars!');
+        }
+    </script>
 </body>
 </html>
