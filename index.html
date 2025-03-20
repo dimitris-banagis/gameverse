@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Games 2000 παιχνιδια</title>
+    <title>Fun Games</title>
     <style>
         body {
             background-color: #121212;
@@ -42,7 +42,7 @@
     </style>
 </head>
 <body>
-    <h1>Fun Games παλι κατι εγινε δυστηχος θα ειναι ετοιμο κατα τις 11.5 το βραδυ</h1>
+    <h1>Fun Games μακαρι αυτην τη φορα να ειναι μια χαρα ολα αυριο μεθαυριο μπορει να τα κανω 5000 η και 10000 παιχνιδια</h1>
     <input type="text" class="search-bar" id="searchInput" onkeyup="searchGames()" placeholder="Search for games...">
     
     <h2>Main Games</h2>
@@ -90,10 +90,6 @@
             { name: "Sonic The Hedgehog", url: "https://www.sonicthehedgehog.com/" },
             { name: "Phasmophobia", url: "https://store.steampowered.com/app/739630/Phasmophobia/" }
         ];
-        
-        while (games.length < 100000) {
-            games.push({ name: "nickelodeon.gr " + (games.length + 1), url: "https://nickelodeon.gr./game" + (games.length + 1) });
-        }
         
         let gamesList = document.getElementById("gamesList");
         games.forEach(game => {
