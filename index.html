@@ -1,126 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Games</title>
     <style>
         body {
-            background-color: #121212;
-            color: white;
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #f4f4f4;
         }
-        .game {
-            margin: 10px;
-            padding: 10px;
-            background: #1e1e1e;
-            display: inline-block;
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
             border-radius: 10px;
-        }
-        .game a {
-            color: #00d1ff;
-            text-decoration: none;
+            box-shadow: 0px 0px 10px gray;
         }
         .search-bar {
-            margin: 20px;
+            width: 100%;
             padding: 10px;
-            width: 50%;
-            font-size: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .game-list {
+            list-style: none;
+            padding: 0;
+        }
+        .game-list li {
+            margin: 10px 0;
+        }
+        .game-list a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
         }
         .rating {
             margin-top: 20px;
         }
-        .rating span {
-            font-size: 24px;
-            cursor: pointer;
-            color: white;
-        }
-        .rating span:hover, .rating span.active {
-            color: yellow;
-        }
     </style>
-</head>
-<body>
-    <h1>Fun Games ουτε παλι δεν τα καταφερα αυριο μετα τισ 5 θα μπορο επειδη το παλιο ρομποτ που μου τα φτιαχνει εχει οριο στα μυνυματα μπορεισ μονο 10 καθε 4 ωρες -Δημητρης</h1>
-    <input type="text" class="search-bar" id="searchInput" onkeyup="searchGames()" placeholder="Search for games...">
-    
-    <h2>Main Games</h2>
-    <div id="gamesList"></div>
-    
-    <h2>Rate This Site</h2>
-    <div class="rating">
-        <span onclick="rate(1)">&#9733;</span>
-        <span onclick="rate(2)">&#9733;</span>
-        <span onclick="rate(3)">&#9733;</span>
-        <span onclick="rate(4)">&#9733;</span>
-        <span onclick="rate(5)">&#9733;</span>
-    </div>
-    
     <script>
-        let games = [
-            { name: "Solar Smash", url: "https://solarsmash.co/" },
-            { name: "Solar System Scope", url: "https://www.solarsystemscope.com/" },
-            { name: "Nickelodeon Games", url: "https://nickelodeon.gr/" },
-            { name: "UNO", url: "https://www.letsplayuno.com/" },
-            { name: "Gran Turismo 7", url: "https://www.playstation.com/el-gr/games/gran-turismo-7/" },
-            { name: "Need for Speed", url: "https://www.ea.com/en-gb/games/need-for-speed" },
-            { name: "Forza Horizon 5", url: "https://forzamotorsport.net/en-us/games/fh5" },
-            { name: "Mario Kart Tour", url: "https://mariokarttour.com/en-US" },
-            { name: "Trackmania", url: "https://www.trackmania.com/" },
-            { name: "Rocket League", url: "https://www.rocketleague.com/" },
-            { name: "Minecraft", url: "https://www.minecraft.net/" },
-            { name: "Fortnite", url: "https://www.epicgames.com/fortnite/en-US/home" },
-            { name: "Roblox", url: "https://www.roblox.com/" },
-            { name: "Among Us", url: "https://innersloth.com/gameAmongUs.php" },
-            { name: "League of Legends", url: "https://www.leagueoflegends.com/" },
-            { name: "Valorant", url: "https://playvalorant.com/" },
-            { name: "Call of Duty: Warzone", url: "https://www.callofduty.com/warzone" },
-            { name: "GTA V", url: "https://www.rockstargames.com/V/" },
-            { name: "Apex Legends", url: "https://www.ea.com/games/apex-legends" },
-            { name: "FIFA 23", url: "https://www.ea.com/games/fifa/fifa-23" },
-            { name: "PUBG", url: "https://pubg.com/" },
-            { name: "Overwatch 2", url: "https://playoverwatch.com/" },
-            { name: "Clash Royale", url: "https://supercell.com/en/games/clashroyale/" },
-            { name: "Clash of Clans", url: "https://supercell.com/en/games/clashofclans/" },
-            { name: "Brawl Stars", url: "https://supercell.com/en/games/brawlstars/" },
-            { name: "Toca Life World", url: "https://tocaboca.com/" },
-            { name: "Free Fire", url: "https://ff.garena.com/en/" },
-            { name: "Only Up!", url: "https://onlyup-game.io/" },
-            { name: "Sonic The Hedgehog", url: "https://www.sonicthehedgehog.com/" },
-            { name: "Phasmophobia", url: "https://store.steampowered.com/app/739630/Phasmophobia/" }
-        ];
-        
-        let gamesList = document.getElementById("gamesList");
-        games.forEach(game => {
-            let gameDiv = document.createElement("div");
-            gameDiv.classList.add("game");
-            let link = document.createElement("a");
-            link.href = game.url;
-            link.textContent = game.name;
-            gameDiv.appendChild(link);
-            gamesList.appendChild(gameDiv);
-        });
-        
         function searchGames() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let games = document.querySelectorAll('.game');
-            games.forEach(game => {
-                if (game.innerText.toLowerCase().includes(input)) {
-                    game.style.display = 'inline-block';
-                } else {
-                    game.style.display = 'none';
-                }
-            });
-        }
-        function rate(stars) {
-            document.querySelectorAll('.rating span').forEach((star, index) => {
-                star.classList.remove('active');
-                if (index < stars) {
-                    star.classList.add('active');
-                }
-            });
+            let input = document.getElementById("search").value.toLowerCase();
+            let games = document.getElementsByClassName("game-item");
+            for (let game of games) {
+                let text = game.textContent.toLowerCase();
+                game.style.display = text.includes(input) ? "block" : "none";
+            }
         }
     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Games</h1>
+        <input type="text" id="search" class="search-bar" onkeyup="searchGames()" placeholder="Αναζήτηση παιχνιδιών...">
+        <ul class="game-list">
+            <li class="game-item"><a href="https://www.letsplayuno.com/">UNO</a></li>
+            <li class="game-item"><a href="https://ff.garena.com/en">Free Fire</a></li>
+            <li class="game-item"><a href="https://poki.com/gr/g/vortellis-pizza">Pizza</a></li>
+            <li class="game-item"><a href="https://www.tocaboca.com/">Toca Boca</a></li>
+            <li class="game-item"><a href="https://poki.com/gr/g/blocky-blast-puzzle">Block Blast</a></li>
+            <li class="game-item"><a href="https://playtictactoe.org/">Tic Tac Toe</a></li>
+            <li class="game-item"><a href="https://now.gg/apps/pazu-games/2767/avatar-world-city-life.html">Avatar World</a></li>
+            <li class="game-item"><a href="https://poki.com/en/g/hangman">Hangman (Κρεμάλα)</a></li>
+            <li class="game-item"><a href="https://www.roblox.com/games/277751860/Epic-Minigames">Epic Minigames (Roblox)</a></li>
+            <li class="game-item"><a href="https://www.fallguys.com/en-US">Fall Guys</a></li>
+            <li class="game-item"><a href="https://www.grubiks.com/solvers/rubiks-cube-3x3x3/">Rubik's Cube Solver</a></li>
+            <li class="game-item"><a href="https://www.starwars.com/">Star Wars</a></li>
+            <li class="game-item"><a href="https://play.google.com/store/apps/details?id=com.savetheworld.game">My Little Universe</a></li>
+            <li class="game-item"><a href="https://onlyup-game.io/">Only Up</a></li>
+            <li class="game-item"><a href="https://www.sonicthehedgehog.com/">Sonic</a></li>
+            <li class="game-item"><a href="https://fearstofantom.com">Fears to Fantom</a></li>
+            <li class="game-item"><a href="https://snake.io">Snake.io</a></li>
+            <li class="game-item"><a href="https://www.playstation.com/el-gr/games/gran-turismo-7/">Gran Turismo 7</a></li>
+            <li class="game-item"><a href="https://www.ea.com/en-gb/games/need-for-speed">Need for Speed</a></li>
+            <li class="game-item"><a href="https://play.google.com/store/apps/details?id=com.playstrom.dop2">DOP 2</a></li>
+            <li class="game-item"><a href="https://pou.me">Pou</a></li>
+            <li class="game-item"><a href="https://www.lego.com/en-gr/themes/ninjago/games">Ninja Go</a></li>
+            <li class="game-item"><a href="https://store.steampowered.com/app/739630/Phasmophobia/">Phasmophobia</a></li>
+            <li class="game-item"><a href="https://pacman.com">Pac-Man</a></li>
+            <li class="game-item"><a href="https://beinternetawesome.withgoogle.com/el_gr/interland">Interland</a></li>
+            <li class="game-item"><a href="https://hole.io">Hole.io</a></li>
+            <li class="game-item"><a href="https://www.crazygames.com/t/restaurant">Restaurant Simulator</a></li>
+            <li class="game-item"><a href="https://play.google.com/store/apps/details?id=com.playspare.supermarket.store.simulator">Market Simulator</a></li>
+            <li class="game-item"><a href="https://www.roblox.com/games/114861592677288/Destroy-Grandma">Destroy Grandma</a></li>
+            <li class="game-item"><a href="https://www.youtube.com/results?search_query=mrbeast">MrBeast</a></li>
+            <li class="game-item"><a href="https://www.1001games.com/g/toilet-paper">Paper Toilet Game</a></li>
+            <li class="game-item"><a href="https://neal.fun">Neal.fun</a></li>
+        </ul>
+        <div class="rating">
+            <p>Βαθμολογήστε το site:</p>
+            <span>⭐️⭐️⭐️⭐️⭐️</span>
+        </div>
+    </div>
 </body>
 </html>
