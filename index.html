@@ -6,67 +6,85 @@
     <title>Fun Games</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
-        .search-bar { margin: 20px; padding: 10px; width: 80%; max-width: 400px; }
-        .game-list { display: flex; flex-wrap: wrap; justify-content: center; }
-        .game { margin: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 10px; width: 200px; }
-        .rating { margin-top: 10px; }
+        .search-bar { margin: 20px; }
+        .games-list { list-style: none; padding: 0; }
+        .games-list li { margin: 10px 0; }
+        .rating { margin-top: 20px; }
     </style>
 </head>
 <body>
     <h1>Fun Games</h1>
-    <button onclick="setLanguage('el')">Ελληνικά</button>
-    <button onclick="setLanguage('en')">English</button>
-    <input type="text" class="search-bar" placeholder="Αναζήτηση παιχνιδιών..." onkeyup="searchGames()">
     
-    <h2 id="main-games">Main Games</h2>
-    <div class="game-list" id="games">
-        <!-- Τα παιχνίδια θα προστεθούν εδώ με JavaScript -->
+    <div>
+        <label for="language">Επιλογή γλώσσας: </label>
+        <select id="language" onchange="translatePage()">
+            <option value="el">Ελληνικά</option>
+            <option value="en">English</option>
+        </select>
+    </div>
+    
+    <input type="text" id="search" class="search-bar" placeholder="Αναζήτηση παιχνιδιών..." onkeyup="searchGames()">
+    
+    <h2 id="main-games">Βασικά Παιχνίδια</h2>
+    <ul id="game-list" class="games-list">
+        <li><a href="https://www.letsplayuno.com/">UNO</a></li>
+        <li><a href="https://ff.garena.com/en">Free Fire</a></li>
+        <li><a href="https://poki.com/gr/g/vortellis-pizza">Pizza Game</a></li>
+        <li><a href="https://www.tocaboca.com/">Toca Boca</a></li>
+        <li><a href="https://poki.com/gr/g/blocky-blast-puzzle">Block Blast</a></li>
+        <!-- Συνεχίζεται με όλα τα παιχνίδια που έχεις ζητήσει -->
+    </ul>
+    
+    <h2 id="multiplayer-games">Multiplayer Games</h2>
+    <ul class="games-list">
+        <li><a href="https://www.roblox.com/games/277751860/Epic-Minigames">Epic Minigames (Roblox)</a></li>
+        <li><a href="https://www.fallguys.com/en-US">Fall Guys</a></li>
+        <li><a href="https://www.ea.com/en-gb/games/need-for-speed">Need for Speed</a></li>
+        <!-- Προσθήκη περισσότερων multiplayer games -->
+    </ul>
+    
+    <h2 id="quiz-games">Quiz Games</h2>
+    <ul class="games-list">
+        <li><a href="https://test-iq-online.com/en/">Free IQ Test</a></li>
+        <li><a href="https://neal.fun">Neal Fun</a></li>
+        <!-- Προσθήκη περισσότερων quiz games -->
+    </ul>
+    
+    <h2 id="greece-games">Greece Games</h2>
+    <ul class="games-list">
+        <li><a href="https://nickelodeon.gr/games/nickelodeon-i-gates-pou-latrevoun-tin-pitsa">Τα γατάκια που λατρεύουν την πίτσα</a></li>
+        <li><a href="https://beinternetawesome.withgoogle.com/el_gr/interland">Interland</a></li>
+        <!-- Προσθήκη περισσότερων Greece games -->
+    </ul>
+    
+    <div class="rating">
+        <p>Βαθμολογήστε το site:</p>
+        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
     </div>
     
     <script>
-        let games = [
-            { name: "UNO", url: "https://www.letsplayuno.com/" },
-            { name: "Free Fire", url: "https://ff.garena.com/en" },
-            { name: "Pizza Game", url: "https://poki.com/gr/g/vortellis-pizza" },
-            { name: "Toca Boca", url: "https://www.tocaboca.com/" },
-            { name: "Block Blast", url: "https://poki.com/gr/g/blocky-blast-puzzle" },
-            // + 1995 άλλα παιχνίδια
-        ];
-        
-        function displayGames() {
-            let gameList = document.getElementById("games");
-            gameList.innerHTML = "";
-            games.forEach(game => {
-                let gameDiv = document.createElement("div");
-                gameDiv.className = "game";
-                gameDiv.innerHTML = `<a href="${game.url}" target="_blank">${game.name}</a>`;
-                gameList.appendChild(gameDiv);
-            });
-        }
-
         function searchGames() {
-            let query = document.querySelector(".search-bar").value.toLowerCase();
-            let filteredGames = games.filter(game => game.name.toLowerCase().includes(query));
-            let gameList = document.getElementById("games");
-            gameList.innerHTML = "";
-            filteredGames.forEach(game => {
-                let gameDiv = document.createElement("div");
-                gameDiv.className = "game";
-                gameDiv.innerHTML = `<a href="${game.url}" target="_blank">${game.name}</a>`;
-                gameList.appendChild(gameDiv);
+            let input = document.getElementById('search').value.toLowerCase();
+            let games = document.querySelectorAll('.games-list li');
+            games.forEach(game => {
+                game.style.display = game.textContent.toLowerCase().includes(input) ? '' : 'none';
             });
         }
 
-        function setLanguage(lang) {
-            if (lang === 'el') {
-                document.getElementById("main-games").innerText = "Κύρια Παιχνίδια";
+        function translatePage() {
+            let lang = document.getElementById('language').value;
+            if (lang === 'en') {
+                document.getElementById('main-games').innerText = 'Main Games';
+                document.getElementById('multiplayer-games').innerText = 'Multiplayer Games';
+                document.getElementById('quiz-games').innerText = 'Quiz Games';
+                document.getElementById('greece-games').innerText = 'Greece Games';
             } else {
-                document.getElementById("main-games").innerText = "Main Games";
+                document.getElementById('main-games').innerText = 'Βασικά Παιχνίδια';
+                document.getElementById('multiplayer-games').innerText = 'Multiplayer Games';
+                document.getElementById('quiz-games').innerText = 'Quiz Games';
+                document.getElementById('greece-games').innerText = 'Greece Games';
             }
         }
-        
-        displayGames();
     </script>
 </body>
 </html>
-
