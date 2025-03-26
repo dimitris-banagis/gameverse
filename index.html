@@ -1,90 +1,245 @@
+// Part 1: Main Structure & Basic UI
+
+const gamesList = [
+    { title: "Minecraft", category: "Multiplayer", link: "https://minecraft.net" },
+    { title: "Fortnite", category: "Multiplayer", link: "https://www.epicgames.com/fortnite" },
+    { title: "Among Us", category: "Multiplayer", link: "https://www.innersloth.com/games/among-us/" },
+    { title: "Trivia Crack", category: "Quiz Games", link: "https://www.triviacrack.com/" },
+    { title: "Greek Mythology Quiz", category: "Greece Games", link: "https://www.quizgreece.com/" }
+];
+
+const categories = ["Main Games", "Multiplayer Games", "Greece Games", "Quiz Games"];
+
+function createCategoryButtons() {
+    const container = document.getElementById("categories");
+    categories.forEach(category => {
+        let button = document.createElement("button");
+        button.innerText = category;
+        button.onclick = () => filterGames(category);
+        container.appendChild(button);
+    });
+}
+
+function filterGames(category) {
+    const gamesContainer = document.getElementById("games");
+    gamesContainer.innerHTML = "";
+    let filteredGames = gamesList.filter(game => game.category === category);
+    filteredGames.forEach(game => {
+        let gameItem = document.createElement("div");
+        gameItem.innerHTML = `<a href='${game.link}' target='_blank'>${game.title}</a>`;
+        gamesContainer.appendChild(gameItem);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    createCategoryButtons();
+});
 <!DOCTYPE html>
 <html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Games</title>
+    <title>Παιχνίδια</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .search-bar { margin: 20px; }
-        .games-list { list-style: none; padding: 0; }
-        .games-list li { margin: 10px 0; }
-        .rating { margin-top: 20px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .game-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .game {
+            width: 45%;
+            margin: 10px;
+            padding: 15px;
+            background: #e3e3e3;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .rating {
+            color: gold;
+        }
     </style>
 </head>
 <body>
-    <h1>Fun Games δεν μπορο αλλο παλι κατι εγινε και θα το εχο ετοιμο στης 23 μαρτιου 8.00 το βραδυ  bye!!!!    Δημητρης μ.</h1>
-    
-    <div>
-        <label for="language">Επιλογή γλώσσας: </label>
-        <select id="language" onchange="translatePage()">
-            <option value="el">Ελληνικά</option>
-            <option value="en">English</option>
-        </select>
-    </div>
-    
-    <input type="text" id="search" class="search-bar" placeholder="Αναζήτηση παιχνιδιών..." onkeyup="searchGames()">
-    
-    <h2 id="main-games">Βασικά Παιχνίδια</h2>
-    <ul id="game-list" class="games-list">
-        <li><a href="https://www.letsplayuno.com/">UNO</a></li>
-        <li><a href="https://ff.garena.com/en">Free Fire</a></li>
-        <li><a href="https://poki.com/gr/g/vortellis-pizza">Pizza Game</a></li>
-        <li><a href="https://www.tocaboca.com/">Toca Boca</a></li>
-        <li><a href="https://poki.com/gr/g/blocky-blast-puzzle">Block Blast</a></li>
-        <!-- Συνεχίζεται με όλα τα παιχνίδια που έχεις ζητήσει -->
-    </ul>
-    
-    <h2 id="multiplayer-games">Multiplayer Games</h2>
-    <ul class="games-list">
-        <li><a href="https://www.roblox.com/games/277751860/Epic-Minigames">Epic Minigames (Roblox)</a></li>
-        <li><a href="https://www.fallguys.com/en-US">Fall Guys</a></li>
-        <li><a href="https://www.ea.com/en-gb/games/need-for-speed">Need for Speed</a></li>
-        <!-- Προσθήκη περισσότερων multiplayer games -->
-    </ul>
-    
-    <h2 id="quiz-games">Quiz Games</h2>
-    <ul class="games-list">
-        <li><a href="https://test-iq-online.com/en/">Free IQ Test</a></li>
-        <li><a href="https://neal.fun">Neal Fun</a></li>
-        <!-- Προσθήκη περισσότερων quiz games -->
-    </ul>
-    
-    <h2 id="greece-games">Greece Games</h2>
-    <ul class="games-list">
-        <li><a href="https://nickelodeon.gr/games/nickelodeon-i-gates-pou-latrevoun-tin-pitsa">Τα γατάκια που λατρεύουν την πίτσα</a></li>
-        <li><a href="https://beinternetawesome.withgoogle.com/el_gr/interland">Interland</a></li>
-        <!-- Προσθήκη περισσότερων Greece games -->
-    </ul>
-    
-    <div class="rating">
-        <p>Βαθμολογήστε το site:</p>
-        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span>
-    </div>
-    
-    <script>
-        function searchGames() {
-            let input = document.getElementById('search').value.toLowerCase();
-            let games = document.querySelectorAll('.games-list li');
-            games.forEach(game => {
-                game.style.display = game.textContent.toLowerCase().includes(input) ? '' : 'none';
-            });
-        }
 
-        function translatePage() {
-            let lang = document.getElementById('language').value;
-            if (lang === 'en') {
-                document.getElementById('main-games').innerText = 'Main Games';
-                document.getElementById('multiplayer-games').innerText = 'Multiplayer Games';
-                document.getElementById('quiz-games').innerText = 'Quiz Games';
-                document.getElementById('greece-games').innerText = 'Greece Games';
-            } else {
-                document.getElementById('main-games').innerText = 'Βασικά Παιχνίδια';
-                document.getElementById('multiplayer-games').innerText = 'Multiplayer Games';
-                document.getElementById('quiz-games').innerText = 'Quiz Games';
-                document.getElementById('greece-games').innerText = 'Greece Games';
-            }
+<div class="container">
+    <h1>Παιχνίδια</h1>
+    <div class="game-list">
+        <div class="game">
+            <h3>Super Mario</h3>
+            <p>Ένα κλασικό παιχνίδι με τον Mario!</p>
+            <p class="rating">★★★★★</p>
+        </div>
+        <div class="game">
+            <h3>Pac-Man</h3>
+            <p>Φάε όλες τις τελείες και απέφυγε τα φαντάσματα!</p>
+            <p class="rating">★★★★☆</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<div class="container">
+    <h2>Σχόλια και Βαθμολογίες</h2>
+    <div id="comments-section">
+        <h3>Αφήστε το σχόλιό σας</h3>
+        <textarea id="comment-input" rows="4" cols="50" placeholder="Γράψτε το σχόλιό σας εδώ..."></textarea>
+        <br>
+        <button onclick="submitComment()">Υποβολή</button>
+    </div>
+    
+    <h3>Σχόλια χρηστών</h3>
+    <ul id="comment-list">
+        <!-- Τα σχόλια θα εμφανίζονται εδώ -->
+    </ul>
+</div>
+
+<script>
+    function submitComment() {
+        let commentText = document.getElementById("comment-input").value;
+        if (commentText.trim() !== "") {
+            let commentList = document.getElementById("comment-list");
+            let newComment = document.createElement("li");
+            newComment.textContent = commentText;
+            commentList.appendChild(newComment);
+            document.getElementById("comment-input").value = "";
+        } else {
+            alert("Παρακαλώ εισάγετε ένα σχόλιο πριν την υποβολή!");
         }
-    </script>
+    }
+</script>
+<div class="container">
+    <h2>Βαθμολογίες Χρηστών</h2>
+    <div id="rating-section">
+        <h3>Βαθμολογήστε το site</h3>
+        <div class="star-rating">
+            <span class="star" onclick="rateSite(1)">&#9733;</span>
+            <span class="star" onclick="rateSite(2)">&#9733;</span>
+            <span class="star" onclick="rateSite(3)">&#9733;</span>
+            <span class="star" onclick="rateSite(4)">&#9733;</span>
+            <span class="star" onclick="rateSite(5)">&#9733;</span>
+        </div>
+        <p id="rating-message">Επιλέξτε βαθμολογία!</p>
+    </div>
+
+    <h3>Μέση Βαθμολογία</h3>
+    <p id="average-rating">Δεν υπάρχουν ακόμα βαθμολογίες.</p>
+</div>
+
+<script>
+    let ratings = [];
+    
+    function rateSite(stars) {
+        ratings.push(stars);
+        let total = ratings.reduce((a, b) => a + b, 0);
+        let average = (total / ratings.length).toFixed(1);
+        
+        document.getElementById("rating-message").textContent = "Ευχαριστούμε για τη βαθμολογία σας!";
+        document.getElementById("average-rating").textContent = "Μέση Βαθμολογία: " + average + " ★";
+    }
+</script>
+
+<style>
+    .star-rating {
+        font-size: 2em;
+        color: gold;
+        cursor: pointer;
+    }
+    .star:hover {
+        color: orange;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin & Leveling System Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .game-container { text-align: center; margin-top: 50px; }
+        .coin-display { font-size: 24px; margin-bottom: 20px; }
+        .level-display { font-size: 24px; margin-bottom: 20px; }
+        .button { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Welcome to the Game!</h1>
+    <div class="coin-display">
+        Coins: <span id="coins">0</span>
+    </div>
+    <div class="level-display">
+        Level: <span id="level">1</span>
+    </div>
+    <button class="button" onclick="earnCoins()">Earn Coins!</button>
+    <button class="button" onclick="buyItem()">Buy Item (100 Coins)</button>
+    <button class="button" onclick="checkLevelUp()">Check Level Up</button>
+</div>
+
+<script>
+// Initializing the number of coins and player level
+let coins = 0;
+let level = 1;
+let coinsNeededForLevelUp = 100; // coins required to level up
+
+// Function to update the coin display
+function updateCoinDisplay() {
+    document.getElementById('coins').innerText = coins;
+}
+
+// Function to update the level display
+function updateLevelDisplay() {
+    document.getElementById('level').innerText = level;
+}
+
+// Function that simulates earning coins
+function earnCoins() {
+    // Earn between 10 and 50 coins randomly
+    let earnedCoins = Math.floor(Math.random() * 41) + 10;
+    coins += earnedCoins;
+    alert(`You earned ${earnedCoins} coins!`);
+    updateCoinDisplay();
+    checkLevelUp(); // Check if the player has leveled up
+}
+
+// Function to buy an item (example: an item costs 100 coins)
+function buyItem() {
+    if (coins >= 100) {
+        coins -= 100;
+        alert("You bought an item!");
+        updateCoinDisplay();
+    } else {
+        alert("Not enough coins to buy this item.");
+    }
+}
+
+// Function to check if the player should level up
+function checkLevelUp() {
+    if (coins >= coinsNeededForLevelUp) {
+        level++;
+        coins -= coinsNeededForLevelUp; // Deduct coins for level-up
+        coinsNeededForLevelUp = Math.floor(coinsNeededForLevelUp * 1.5); // Increase coins needed for next level-up
+        alert(`Congratulations! You leveled up to Level ${level}!`);
+        updateLevelDisplay();
+        updateCoinDisplay();
+    }
+}
+</script>
+
 </body>
 </html>
