@@ -95,6 +95,26 @@
       border-radius: 5px;
       border: 1px solid #ccc;
     }
+
+    .rating-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .rating-button {
+      padding: 5px 10px;
+      background-color: #ccc;
+      border: 1px solid #333;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .rating-button:hover {
+      background-color: #333;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -112,11 +132,11 @@
   </main>
 
   <script>
-    // Παράδειγμα 2000 παιχνιδιών με τίτλους, περιγραφές, βαθμολογίες και σχόλια
-    const games = Array.from({ length: 2000 }, (_, index) => ({
+    // Παράδειγμα 10 παιχνιδιών με τίτλους, περιγραφές, βαθμολογίες και σχόλια
+    const games = Array.from({ length: 10 }, (_, index) => ({
       title: `Παιχνίδι ${index + 1}`,
       description: `Αυτή είναι η περιγραφή του παιχνιδιού ${index + 1}.`,
-      rating: Math.floor(Math.random() * 5) + 1, // Τυχαία βαθμολογία από 1 έως 5
+      rating: null, // Ξεκινάμε χωρίς βαθμολογία
       comments: [] // Κάθε παιχνίδι ξεκινάει χωρίς σχόλια
     }));
 
@@ -124,7 +144,7 @@
       const gameListContainer = document.getElementById('game-list');
       gameListContainer.innerHTML = '';
 
-      filteredGames.forEach(game => {
+      filteredGames.forEach((game, gameIndex) => {
         const gameCard = document.createElement('div');
         gameCard.classList.add('game-card');
 
@@ -138,7 +158,23 @@
 
         const gameRating = document.createElement('div');
         gameRating.classList.add('rating');
-        gameRating.textContent = `Βαθμολογία: ${game.rating}/5`;
+        gameRating.textContent = game.rating !== null ? `Βαθμολογία: ${game.rating}/5` : 'Μη Βαθμολογημένο';
+
+        const ratingButtons = document.createElement('div');
+        ratingButtons.classList.add('rating-buttons');
+
+        [1, 2, 3, 4, 5].forEach(rating => {
+          const button = document.createElement('button');
+          button.classList.add('rating-button');
+          button.textContent = rating;
+          button.addEventListener('click', () => {
+            if (game.rating !== rating) {
+              game.rating = rating;
+              displayGames(filteredGames); // Ενημέρωση της λίστας παιχνιδιών
+            }
+          });
+          ratingButtons.appendChild(button);
+        });
 
         const commentBox = document.createElement('div');
         commentBox.classList.add('comment-box');
@@ -156,7 +192,7 @@
           if (commentText) {
             game.comments.push({ text: commentText });
             commentInput.value = '';
-            displayGames(filteredGames); // Ενημέρωση της λίστας παιχνιδιών μετά την προσθήκη σχολίου
+            displayGames(filteredGames); // Ενημέρωση της λίστας παιχνιδιών
           }
         });
 
@@ -175,6 +211,7 @@
         gameCard.appendChild(gameTitle);
         gameCard.appendChild(gameDescription);
         gameCard.appendChild(gameRating);
+        gameCard.appendChild(ratingButtons);
         gameCard.appendChild(commentBox);
         gameCard.appendChild(commentList);
 
