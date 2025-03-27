@@ -1,137 +1,114 @@
-<!DOCTYPE html>
-<html lang="el">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Παιχνίδια</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+document.addEventListener("DOMContentLoaded", function() {
+    loadGameData();
+    generateGames(2000); // Δημιουργεί τα 2000 παιχνίδια
+});
+
+function generateGames(numGames) {
+    const container = document.getElementById('games-container');
+    
+    for (let i = 1; i <= numGames; i++) {
+        const gameDiv = document.createElement('div');
+        gameDiv.classList.add('game');
+        gameDiv.setAttribute('data-game-id', i);
+        
+        const gameTitle = document.createElement('h2');
+        gameTitle.textContent = `Παιχνίδι ${i}`;
+        
+        const rateBtn = document.createElement('button');
+        rateBtn.textContent = "Βαθμολογήστε";
+        rateBtn.onclick = () => rateGame(i);
+        
+        const commentsSection = document.createElement('div');
+        commentsSection.classList.add('comments-section');
+        commentsSection.innerHTML = `
+            <h3>Σχόλια:</h3>
+            <ul id="comments-${i}"></ul>
+            <input type="text" id="comment-input-${i}" placeholder="Γράψε το σχόλιο σου...">
+            <button onclick="addComment(${i})">Προσθήκη Σχολίου</button>
+        `;
+        
+        const ratingDiv = document.createElement('div');
+        ratingDiv.classList.add('rating');
+        ratingDiv.innerHTML = `
+            <p>Βαθμολογία: <span id="rating-${i}">0</span>/5</p>
+        `;
+        
+        gameDiv.appendChild(gameTitle);
+        gameDiv.appendChild(rateBtn);
+        gameDiv.appendChild(commentsSection);
+        gameDiv.appendChild(ratingDiv);
+        
+        container.appendChild(gameDiv);
+    }
+}
+
+function loadGameData() {
+    // Φόρτωμα δεδομένων (βαθμολογία και σχόλια) από το localStorage
+    const games = document.querySelectorAll('.game');
+    games.forEach(game => {
+        const gameId = game.getAttribute('data-game-id');
+        const savedRating = localStorage.getItem(`rating-${gameId}`);
+        const savedComments = JSON.parse(localStorage.getItem(`comments-${gameId}`)) || [];
+        
+        // Εμφανίζουμε τη βαθμολογία
+        if (savedRating) {
+            document.getElementById(`rating-${gameId}`).textContent = savedRating;
         }
-        header {
-            background: #333;
-            color: white;
-            padding: 15px;
-        }
-        #search {
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            margin-top: 10px;
-        }
-        #game-list {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            padding: 20px;
-        }
-        .game {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        button {
-            background: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #218838;
-        }
-        #pagination {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Καλώς ήρθες στα Παιχνίδια</h1>
-        <input type="text" id="search" placeholder="Αναζήτηση παιχνιδιών...">
-    </header>
-
-    <main>
-        <div id="game-list"></div>
-        <div id="pagination"></div>
-    </main>
-
-    <footer>
-        <p>© 2025 Παιχνίδια</p>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const gamesPerPage = 50;
-            let games = [
-                { "title": "Minecraft", "rating": 4.5 },
-                { "title": "Fortnite", "rating": 4.3 },
-                { "title": "Roblox", "rating": 4.0 },
-                { "title": "Among Us", "rating": 4.2 },
-                { "title": "Call of Duty", "rating": 4.4 },
-                { "title": "League of Legends", "rating": 4.1 },
-                { "title": "Clash Royale", "rating": 4.3 },
-                { "title": "Brawl Stars", "rating": 4.2 },
-                { "title": "Apex Legends", "rating": 4.3 },
-                { "title": "FIFA 23", "rating": 4.6 }
-                // + 1990 ακόμα παιχνίδια
-            ];
-            let currentPage = 1;
-
-            function displayGames(filteredGames = games) {
-                const gameList = document.getElementById("game-list");
-                gameList.innerHTML = "";
-
-                const start = (currentPage - 1) * gamesPerPage;
-                const end = start + gamesPerPage;
-                const gamesToShow = filteredGames.slice(start, end);
-
-                gamesToShow.forEach(game => {
-                    const gameDiv = document.createElement("div");
-                    gameDiv.classList.add("game");
-                    gameDiv.innerHTML = `
-                        <h3>${game.title}</h3>
-                        <button onclick="rateGame('${game.title}')">Βαθμολογήστε</button>
-                        <div id="rating-${game.title}">Βαθμολογία: ${game.rating}</div>
-                    `;
-                    gameList.appendChild(gameDiv);
-                });
-
-                displayPagination(filteredGames);
-            }
-
-            function displayPagination(filteredGames) {
-                const paginationDiv = document.getElementById("pagination");
-                paginationDiv.innerHTML = "";
-                const totalPages = Math.ceil(filteredGames.length / gamesPerPage);
-
-                for (let i = 1; i <= totalPages; i++) {
-                    const button = document.createElement("button");
-                    button.innerText = i;
-                    button.addEventListener("click", () => {
-                        currentPage = i;
-                        displayGames(filteredGames);
-                    });
-                    paginationDiv.appendChild(button);
-                }
-            }
-
-            document.getElementById("search").addEventListener("input", (event) => {
-                const searchTerm = event.target.value.toLowerCase();
-                const filteredGames = games.filter(game => game.title.toLowerCase().includes(searchTerm));
-                displayGames(filteredGames);
-            });
-
-            displayGames();
+        
+        // Εμφανίζουμε τα σχόλια
+        savedComments.forEach(comment => {
+            const li = document.createElement('li');
+            li.textContent = comment;
+            document.getElementById(`comments-${gameId}`).appendChild(li);
         });
+    });
+}
 
-        function rateGame(gameTitle) {
-            alert(`Βαθμολογήσατε το παιχνίδι: ${gameTitle}`);
+function rateGame(gameId) {
+    const rating = prompt("Βάλε βαθμολογία (1-5):");
+    
+    if (rating >= 1 && rating <= 5) {
+        // Αποθήκευση της βαθμολογίας
+        localStorage.setItem(`rating-${gameId}`, rating);
+        document.getElementById(`rating-${gameId}`).textContent = rating;
+    } else {
+        alert("Η βαθμολογία πρέπει να είναι μεταξύ 1 και 5.");
+    }
+}
+
+function addComment(gameId) {
+    const commentInput = document.getElementById(`comment-input-${gameId}`);
+    const commentText = commentInput.value;
+    
+    if (commentText.trim() === "") {
+        alert("Παρακαλώ γράψε ένα σχόλιο.");
+        return;
+    }
+    
+    // Αποθήκευση του σχολίου
+    const savedComments = JSON.parse(localStorage.getItem(`comments-${gameId}`)) || [];
+    savedComments.push(commentText);
+    localStorage.setItem(`comments-${gameId}`, JSON.stringify(savedComments));
+    
+    // Εμφάνιση του σχολίου
+    const li = document.createElement('li');
+    li.textContent = commentText;
+    document.getElementById(`comments-${gameId}`).appendChild(li);
+    
+    // Καθαρισμός του πεδίου σχολίου
+    commentInput.value = "";
+}
+
+function searchGames() {
+    const query = document.getElementById('searchBar').value.toLowerCase();
+    const games = document.querySelectorAll('.game');
+    
+    games.forEach(game => {
+        const title = game.querySelector('h2').textContent.toLowerCase();
+        if (title.includes(query)) {
+            game.style.display = '';
+        } else {
+            game.style.display = 'none';
         }
-    </script>
-</body>
-</html>
+    });
+}
