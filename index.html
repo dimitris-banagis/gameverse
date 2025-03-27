@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Games with Ratings and Comments</title>
+  <title>Παιχνίδια με Βαθμολογία και Σχόλια</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -100,7 +100,7 @@
 <body>
 
   <header>
-    <h1>Παιχνίδια Online με Βαθμολογία και Σχόλια</h1>
+    <h1>Παιχνίδια με Βαθμολογία και Σχόλια</h1>
   </header>
 
   <main>
@@ -117,10 +117,7 @@
       title: `Παιχνίδι ${index + 1}`,
       description: `Αυτή είναι η περιγραφή του παιχνιδιού ${index + 1}.`,
       rating: Math.floor(Math.random() * 5) + 1, // Τυχαία βαθμολογία από 1 έως 5
-      comments: [
-        { text: `Σχόλιο 1 για το παιχνίδι ${index + 1}` },
-        { text: `Σχόλιο 2 για το παιχνίδι ${index + 1}` }
-      ]
+      comments: [] // Κάθε παιχνίδι ξεκινάει χωρίς σχόλια
     }));
 
     function displayGames(filteredGames) {
