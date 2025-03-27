@@ -1,166 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Παιχνίδια - Διαθέσιμα Παιχνίδια</title>
+    <title>Παιχνίδια</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            color: #333;
             margin: 0;
             padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
             text-align: center;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 15px;
+        }
+        #search {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+        #game-list {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
             padding: 20px;
         }
-
-        h1 {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .game-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .game-item {
-            width: 200px;
-            height: 150px;
-            margin: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .game {
+            background: white;
+            padding: 10px;
             border-radius: 5px;
-            overflow: hidden;
-            position: relative;
         }
-
-        .game-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .game-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .game-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+        button {
+            background: #28a745;
             color: white;
             padding: 10px;
-            font-size: 1.2em;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .game-list a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .pagination {
-            margin-top: 30px;
-        }
-
-        .page-btn {
-            padding: 10px 15px;
-            margin: 5px;
-            background-color: #007bff;
-            color: white;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
         }
-
-        .page-btn:hover {
-            background-color: #0056b3;
+        button:hover {
+            background: #218838;
+        }
+        #pagination {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Καλώς ήρθες στα Παιχνίδια</h1>
+        <input type="text" id="search" placeholder="Αναζήτηση παιχνιδιών...">
+    </header>
 
-<div class="container">
-    <h1>Διαθέσιμα Παιχνίδια</h1>
-    <div class="game-list" id="game-list">
-        <!-- Τα παιχνίδια θα φορτωθούν εδώ μέσω JS -->
-    </div>
+    <main>
+        <div id="game-list"></div>
+        <div id="pagination"></div>
+    </main>
 
-    <div class="pagination" id="pagination">
-        <!-- Η σελιδοποίηση θα δημιουργηθεί εδώ μέσω JS -->
-    </div>
-</div>
+    <footer>
+        <p>© 2025 Παιχνίδια</p>
+    </footer>
 
-<script>
-// Παράδειγμα 2000 παιχνιδιών
-const games = [];
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const gamesPerPage = 50;
+            let games = [
+                { "title": "Minecraft", "rating": 4.5 },
+                { "title": "Fortnite", "rating": 4.3 },
+                { "title": "Roblox", "rating": 4.0 },
+                { "title": "Among Us", "rating": 4.2 },
+                { "title": "Call of Duty", "rating": 4.4 },
+                { "title": "League of Legends", "rating": 4.1 },
+                { "title": "Clash Royale", "rating": 4.3 },
+                { "title": "Brawl Stars", "rating": 4.2 },
+                { "title": "Apex Legends", "rating": 4.3 },
+                { "title": "FIFA 23", "rating": 4.6 }
+                // + 1990 ακόμα παιχνίδια
+            ];
+            let currentPage = 1;
 
-// Γεννάμε 2000 παιχνίδια με τίτλους και εικόνες
-for (let i = 1; i <= 2000; i++) {
-    games.push({
-        title: `Παιχνίδι ${i}`,
-        imageUrl: `https://via.placeholder.com/200x150?text=Game+${i}`
-    });
-}
+            function displayGames(filteredGames = games) {
+                const gameList = document.getElementById("game-list");
+                gameList.innerHTML = "";
 
-// Ρυθμίσεις για σελιδοποίηση
-const gamesPerPage = 30;
-let currentPage = 1;
+                const start = (currentPage - 1) * gamesPerPage;
+                const end = start + gamesPerPage;
+                const gamesToShow = filteredGames.slice(start, end);
 
-function displayGames(page) {
-    const startIndex = (page - 1) * gamesPerPage;
-    const endIndex = startIndex + gamesPerPage;
-    const pageGames = games.slice(startIndex, endIndex);
+                gamesToShow.forEach(game => {
+                    const gameDiv = document.createElement("div");
+                    gameDiv.classList.add("game");
+                    gameDiv.innerHTML = `
+                        <h3>${game.title}</h3>
+                        <button onclick="rateGame('${game.title}')">Βαθμολογήστε</button>
+                        <div id="rating-${game.title}">Βαθμολογία: ${game.rating}</div>
+                    `;
+                    gameList.appendChild(gameDiv);
+                });
 
-    const gameList = document.getElementById('game-list');
-    gameList.innerHTML = ''; // Καθαρίζουμε την λίστα παιχνιδιών
+                displayPagination(filteredGames);
+            }
 
-    pageGames.forEach(game => {
-        const gameItem = document.createElement('div');
-        gameItem.classList.add('game-item');
-        gameItem.innerHTML = `
-            <a href="#">
-                <img src="${game.imageUrl}" alt="${game.title}">
-                <div class="game-title">${game.title}</div>
-            </a>
-        `;
-        gameList.appendChild(gameItem);
-    });
-    createPagination(page);
-}
+            function displayPagination(filteredGames) {
+                const paginationDiv = document.getElementById("pagination");
+                paginationDiv.innerHTML = "";
+                const totalPages = Math.ceil(filteredGames.length / gamesPerPage);
 
-function createPagination(page) {
-    const totalPages = Math.ceil(games.length / gamesPerPage);
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = ''; // Καθαρίζουμε την σελιδοποίηση
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement("button");
+                    button.innerText = i;
+                    button.addEventListener("click", () => {
+                        currentPage = i;
+                        displayGames(filteredGames);
+                    });
+                    paginationDiv.appendChild(button);
+                }
+            }
 
-    for (let i = 1; i <= totalPages; i++) {
-        const pageBtn = document.createElement('button');
-        pageBtn.classList.add('page-btn');
-        pageBtn.innerText = i;
-        pageBtn.onclick = () => {
-            currentPage = i;
-            displayGames(currentPage);
-        };
-        pagination.appendChild(pageBtn);
-    }
-}
+            document.getElementById("search").addEventListener("input", (event) => {
+                const searchTerm = event.target.value.toLowerCase();
+                const filteredGames = games.filter(game => game.title.toLowerCase().includes(searchTerm));
+                displayGames(filteredGames);
+            });
 
-// Αρχικό φορτώσιμο παιχνιδιών
-displayGames(currentPage);
-</script>
+            displayGames();
+        });
 
+        function rateGame(gameTitle) {
+            alert(`Βαθμολογήσατε το παιχνίδι: ${gameTitle}`);
+        }
+    </script>
 </body>
 </html>
