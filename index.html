@@ -112,35 +112,16 @@
   </main>
 
   <script>
-    const games = [
-      {
-        title: "Παιχνίδι 1",
-        description: "Περιγραφή του παιχνιδιού 1.",
-        rating: 4,
-        comments: [
-          { text: "Πολύ καλό παιχνίδι!" },
-          { text: "Αρκετά διασκεδαστικό." }
-        ]
-      },
-      {
-        title: "Παιχνίδι 2",
-        description: "Περιγραφή του παιχνιδιού 2.",
-        rating: 3,
-        comments: [
-          { text: "Μπορεί να βελτιωθεί." },
-          { text: "Διασκεδαστικό αλλά επαναλαμβανόμενο." }
-        ]
-      },
-      {
-        title: "Παιχνίδι 3",
-        description: "Περιγραφή του παιχνιδιού 3.",
-        rating: 5,
-        comments: [
-          { text: "Φανταστικό!" },
-          { text: "Αγαπημένο παιχνίδι!" }
-        ]
-      }
-    ];
+    // Παράδειγμα 2000 παιχνιδιών με τίτλους, περιγραφές, βαθμολογίες και σχόλια
+    const games = Array.from({ length: 2000 }, (_, index) => ({
+      title: `Παιχνίδι ${index + 1}`,
+      description: `Αυτή είναι η περιγραφή του παιχνιδιού ${index + 1}.`,
+      rating: Math.floor(Math.random() * 5) + 1, // Τυχαία βαθμολογία από 1 έως 5
+      comments: [
+        { text: `Σχόλιο 1 για το παιχνίδι ${index + 1}` },
+        { text: `Σχόλιο 2 για το παιχνίδι ${index + 1}` }
+      ]
+    }));
 
     function displayGames(filteredGames) {
       const gameListContainer = document.getElementById('game-list');
@@ -178,7 +159,7 @@
           if (commentText) {
             game.comments.push({ text: commentText });
             commentInput.value = '';
-            displayGames(filteredGames);
+            displayGames(filteredGames); // Ενημέρωση της λίστας παιχνιδιών μετά την προσθήκη σχολίου
           }
         });
 
