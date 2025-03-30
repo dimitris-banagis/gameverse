@@ -77,7 +77,7 @@
     <script>
         // Δημιουργία 2000 παιχνιδιών με τυχαία βαθμολογία
         const games = [];
-        const gameNames = ["Minecraft", "Fortnite", "Tetris", "Super Mario", "League of Legends", "Counter-Strike", "PUBG", "Among Us", "Zelda", "The Witcher 3", "Overwatch", "FIFA 23"];
+        const gameNames = ["Minecraft", "Fortnite", "Tetris", "Super Mario", "League of Legends","Uno","Tree Forest","Counter-Strike", "PUBG", "Among Us", "Zelda", "The Witcher 3", "Overwatch", "FIFA 23"];
         for (let i = 1; i <= 2000; i++) {
             const randomName = gameNames[Math.floor(Math.random() * gameNames.length)];
             games.push({ title: randomName + " #" + i, rating: (Math.random() * 5).toFixed(1), comments: [] });
