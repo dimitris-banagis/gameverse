@@ -51,7 +51,7 @@
 </head>
 <body>
 
-    <h1>🎮 Καλώς ήρθατε στο Game Reviews!</h1>
+    <h1>🎮 Καλώς ήρθατε στο Fun Games!</h1>
     
     <input type="text" id="search" placeholder="🔍 Αναζήτηση παιχνιδιού..." onkeyup="searchGames()">
     
@@ -78,9 +78,9 @@
         // Δημιουργία 2000 παιχνιδιών με τυχαία βαθμολογία
         const games = [];
         const gameNames = ["Minecraft", "Fortnite", "Tetris", "Super Mario", "League of Legends","Uno","Tree Forest","Counter-Strike", "PUBG", "Among Us", "Zelda", "The Witcher 3", "Overwatch", "FIFA 23"];
-        for (let i = 1; i <= 2000; i++) {
+        for (let i = 1; i <= 200000000000000; i++) {
             const randomName = gameNames[Math.floor(Math.random() * gameNames.length)];
-            games.push({ title: randomName + " #" + i, rating: (Math.random() * 5).toFixed(1), comments: [] });
+            games.push({ title: randomName + " #" + i, rating: (Math.random() * 100).toFixed(0.1), comments: [] });
         }
 
         // Εμφάνιση παιχνιδιών
