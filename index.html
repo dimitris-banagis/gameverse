@@ -1,142 +1,141 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Reviews</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        h1 {
-            margin-top: 20px;
-        }
-        input {
-            width: 300px;
-            padding: 10px;
-            margin: 10px;
-        }
-        #game-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .game {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            margin: 10px;
-            padding: 10px;
-            width: 200px;
-            text-align: center;
-        }
-        .rating, .comments {
-            margin-top: 10px;
-        }
-        #review-section {
-            margin-top: 20px;
-            background-color: white;
-            padding: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>GameHub - 2000+ Παιχνίδια</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    #search-bar {
+      width: 60%;
+      padding: 10px;
+      margin: 20px auto;
+      display: block;
+      font-size: 16px;
+    }
+    .game-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .game {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #ecf0f1;
+      padding: 30px;
+      text-align: center;
+    }
+    textarea {
+      width: 60%;
+      height: 100px;
+      margin: 10px auto;
+      display: block;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
 
-    <h1>🎮 Καλώς ήρθατε στο Fun Games!</h1>
-    
-    <input type="text" id="search" placeholder="🔍 Αναζήτηση παιχνιδιού..." onkeyup="searchGames()">
-    
-    <div id="game-list"></div>
+<header>
+  <h1>🎮 GameHub: Παίξε 2000+ Παιχνίδια</h1>
+</header>
 
-    <div id="review-section">
-        <h2>Βαθμολογία & Σχόλια για το site</h2>
-        <p>Μέση βαθμολογία: <span id="average-rating">-</span>/5</p>
-        <button onclick="rateSite(1)">⭐</button>
-        <button onclick="rateSite(2)">⭐⭐</button>
-        <button onclick="rateSite(3)">⭐⭐⭐</button>
-        <button onclick="rateSite(4)">⭐⭐⭐⭐</button>
-        <button onclick="rateSite(5)">⭐⭐⭐⭐⭐</button>
-        <p id="total-ratings">Βαθμολογίες: 0</p>
+<input type="text" id="search-bar" placeholder="Αναζήτησε παιχνίδι...">
 
-        <h3>Σχόλια</h3>
-        <textarea id="comment" rows="3" cols="50" placeholder="Γράψε ένα σχόλιο..."></textarea><br>
-        <button onclick="addComment()">Προσθήκη Σχολίου</button>
+<div class="game-list" id="game-list">
+  <!-- Εδώ θα μπουν τα παιχνίδια -->
+</div>
 
-        <ul id="comment-list"></ul>
-    </div>
+<footer>
+  <h2>📝 Σχόλια & Βαθμολογία</h2>
+  <label for="rating">Βαθμολογία:</label>
+  <select id="rating">
+    <option value="1">1 ⭐</option>
+    <option value="2">2 ⭐⭐</option>
+    <option value="3">3 ⭐⭐⭐</option>
+    <option value="4">4 ⭐⭐⭐⭐</option>
+    <option value="5">5 ⭐⭐⭐⭐⭐</option>
+  </select>
+  <br>
+  <label for="comment">Σχόλιο:</label>
+  <textarea id="comment" placeholder="Γράψε την άποψή σου..."></textarea>
+  <br>
+  <button onclick="submitFeedback()">Υποβολή</button>
+  <div id="feedback-section"></div>
+</footer>
 
-    <script>
-        // Δημιουργία 2000 παιχνιδιών με τυχαία βαθμολογία
-        const games = [];
-        const gameNames = ["Minecraft", "Fortnite", "toilet paper", "iq test", "Tetris", "Super Mario", "League of Legends","Uno","Tree Forest","Counter-Strike", "PUBG", "Among Us", "Zelda", "The Witcher 3", "Overwatch", "FIFA 23"];
-        for (let i = 1; i <= 200000000000000; i++) {
-            const randomName = gameNames[Math.floor(Math.random() * gameNames.length)];
-            games.push({ title: randomName + " #" + i, rating: (Math.random() * 100).toFixed(0.1), comments: [] });
-        }
+<script>
+  const games = [
+    "UNO", "Pac-Man", "Tetris", "Minecraft", "Super Mario Bros",
+    "Zelda", "Call of Duty", "League of Legends", "Angry Birds",
+    "Clash Royale", "Flappy Bird", "Snake", "Among Us", "Fruit Ninja",
+    "Candy Crush", "GTA V", "Roblox", "Fortnite", "PUBG", "Valorant",
+    "FIFA 23", "Rocket League", "Sonic", "Skyrim", "The Sims 4",
+    "Apex Legends", "Portal", "Overwatch", "Fall Guys", "Geometry Dash",
+    "Battlefield", "CS:GO", "NBA 2K", "Terraria", "Brawl Stars",
+    "Subway Surfers", "Plants vs Zombies", "Red Dead Redemption", "Ludo King",
+    "Wordle", "Slither.io", "Temple Run", "Doodle Jump", "Spider Solitaire",
+    "Jetpack Joyride", "Doom", "Resident Evil", "Need for Speed", "Just Dance"
+    // ➕ Πρόσθεσε μέχρι 2000 τίτλους εδώ
+  ];
 
-        // Εμφάνιση παιχνιδιών
-        function displayGames() {
-            const gameList = document.getElementById("game-list");
-            gameList.innerHTML = "";
-            games.forEach((game, index) => {
-                const gameDiv = document.createElement("div");
-                gameDiv.classList.add("game");
-                gameDiv.innerHTML = `
-                    <h3>${game.title}</h3>
-                    <p class="rating">Βαθμολογία: ${game.rating} / 5</p>
-                `;
-                gameList.appendChild(gameDiv);
-            });
-        }
+  function displayGames(gamesToShow) {
+    const list = document.getElementById("game-list");
+    list.innerHTML = "";
+    gamesToShow.slice(0, 50).forEach(name => {
+      const game = document.createElement("div");
+      game.className = "game";
+      game.innerHTML = `<h3>${name}</h3>`;
+      list.appendChild(game);
+    });
+  }
 
-        displayGames();
+  document.getElementById("search-bar").addEventListener("input", function() {
+    const value = this.value.toLowerCase();
+    const filtered = games.filter(name => name.toLowerCase().includes(value));
+    displayGames(filtered);
+  });
 
-        // Αναζήτηση παιχνιδιών
-        function searchGames() {
-            const searchTerm = document.getElementById("search").value.toLowerCase();
-            document.getElementById("game-list").innerHTML = "";
-            games
-                .filter(game => game.title.toLowerCase().includes(searchTerm))
-                .forEach(game => {
-                    const gameDiv = document.createElement("div");
-                    gameDiv.classList.add("game");
-                    gameDiv.innerHTML = `<h3>${game.title}</h3><p class="rating">Βαθμολογία: ${game.rating} / 5</p>`;
-                    document.getElementById("game-list").appendChild(gameDiv);
-                });
-        }
+  function submitFeedback() {
+    const rating = document.getElementById("rating").value;
+    const comment = document.getElementById("comment").value.trim();
+    if (comment === "") {
+      alert("Γράψε ένα σχόλιο πριν υποβάλεις!");
+      return;
+    }
 
-        // Βαθμολογίες για όλο το site
-        let totalRatings = 0;
-        let sumRatings = 0;
+    const feedback = document.createElement("p");
+    feedback.innerHTML = `⭐ ${rating}/5 – ${comment}`;
+    document.getElementById("feedback-section").appendChild(feedback);
 
-        function rateSite(stars) {
-            totalRatings++;
-            sumRatings += stars;
-            const avg = (sumRatings / totalRatings).toFixed(1);
-            document.getElementById("average-rating").innerText = avg;
-            document.getElementById("total-ratings").innerText = `Βαθμολογίες: ${totalRatings}`;
-        }
+    // Clear inputs
+    document.getElementById("comment").value = "";
+    document.getElementById("rating").selectedIndex = 0;
+  }
 
-        // Σχόλια για όλο το site
-        function addComment() {
-            const commentText = document.getElementById("comment").value;
-            if (commentText.trim() !== "") {
-                const li = document.createElement("li");
-                li.textContent = commentText;
-                document.getElementById("comment-list").appendChild(li);
-                document.getElementById("comment").value = "";
-            }
-        }
-    </script>
+  displayGames(games);
+</script>
 
 </body>
 </html>
