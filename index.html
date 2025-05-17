@@ -309,3 +309,48 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <title>Θερμοκρασία MacBook Pro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f0f0f0;
+    }
+    #temp-display {
+      font-size: 2rem;
+      color: #333;
+      padding: 20px;
+      background-color: white;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Θερμοκρασία MacBook Pro</h1>
+  <div id="temp-display">Φόρτωση θερμοκρασίας...</div>
+
+  <script>
+    async function fetchTemp() {
+      try {
+        const response = await fetch('temp.json?' + new Date().getTime());
+        const data = await response.json();
+        document.getElementById('temp-display').innerText = `Θερμοκρασία: ${data.temperature}`;
+      } catch (error) {
+        document.getElementById('temp-display').innerText = 'Δεν ήταν δυνατή η ανάκτηση θερμοκρασίας.';
+      }
+    }
+
+    fetchTemp();
+    setInterval(fetchTemp, 60000);
+  </script>
+
+</body>
+</html>
