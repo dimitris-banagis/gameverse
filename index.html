@@ -218,252 +218,94 @@
 <div class="game"><a href="https://theimpossiblequiz.io" target="_blank">199. The Impossible Quiz</a></div>
 <div class="game"><a href="https://totaljerkface.com/happy_wheels.tjf" target="_blank">200. Happy Wheels</a></div>
 <div class="game"><a href="https://https://github.com/dimitris-banagis/g-clicker.git" target="_blank">glitch clicker</a></div>
- # Generating the games list for 201-300 and saving it into a .html file
-
-games_201_300 = [
-    "201. Ludo King - https://ludoking.com",
-    "202. Snakes and Ladders - https://www.snakesandladders.com",
-    "203. Minecraft - https://minecraft.net",
-    "204. Sudoku - https://sudoku.com",
-    "205. Clash of Clans - https://clashofclans.com",
-    "206. Candy Crush Saga - https://king.com",
-    "207. Temple Run - https://templerun.com",
-    "208. FarmVille - https://www.farmville.com",
-    "209. World of Warcraft - https://worldofwarcraft.com",
-    "210. Clash Royale - https://clashroyale.com",
-    "211. Fortnite - https://www.epicgames.com/fortnite",
-    "212. Call of Duty - https://www.callofduty.com",
-    "213. League of Legends - https://na.leagueoflegends.com",
-    "214. Roblox - https://www.roblox.com",
-    "215. Among Us - https://innersloth.com/gameAmongUs.php",
-    "216. Pokemon Go - https://pokemongolive.com",
-    "217. Hearthstone - https://us.battle.net/hearthstone/",
-    "218. Apex Legends - https://www.ea.com/games/apex-legends",
-    "219. Counter Strike - https://counter-strike.net",
-    "220. Super Mario Bros - https://www.nintendo.com",
-    "221. NBA 2K - https://nba.2k.com",
-    "222. FIFA 21 - https://www.ea.com/games/fifa",
-    "223. Minecraft Dungeons - https://minecraft.net/en-us/dungeons",
-    "224. The Sims 4 - https://www.ea.com/games/the-sims",
-    "225. Rocket League - https://www.rocketleague.com",
-    "226. Overwatch - https://playoverwatch.com",
-    "227. Valorant - https://playvalorant.com",
-    "228. Rainbow Six Siege - https://www.ubisoft.com/game/rainbow-six/siege",
-    "229. Assassin's Creed Valhalla - https://www.ubisoft.com/game/assassins-creed/valhalla",
-    "230. Red Dead Redemption 2 - https://www.rockstargames.com/reddeadredemption2",
-    "231. The Witcher 3 - https://www.thewitcher.com",
-    "232. Cyberpunk 2077 - https://www.cyberpunk.net",
-    "233. Grand Theft Auto V - https://www.rockstargames.com/V",
-    "234. Star Wars Jedi: Fallen Order - https://www.ea.com/games/starwars/jedi-fallen-order",
-    "235. Doom Eternal - https://bethesda.net",
-    "236. Borderlands 3 - https://borderlands.com",
-    "237. Skyrim - https://elderscrolls.bethesda.net",
-    "238. The Last of Us Part II - https://www.playstation.com",
-    "239. Ghost of Tsushima - https://www.playstation.com",
-    "240. Spiderman: Miles Morales - https://www.playstation.com",
-    "241. Final Fantasy VII Remake - https://www.ffvii-remake.com",
-    "242. Death Stranding - https://www.kojimaproductions.jp/en/ds/",
-    "243. Persona 5 Royal - https://p5r.jp",
-    "244. Monster Hunter World - https://www.monsterhunter.com/world-us/",
-    "245. Resident Evil Village - https://www.residentevil.com/village",
-    "246. Diablo III - https://us.diablo3.com",
-    "247. League of Legends Wild Rift - https://wildrift.leagueoflegends.com",
-    "248. PUBG Mobile - https://www.pubgmobile.com",
-    "249. Free Fire - https://www.ff.garena.com",
-    "250. Call of Duty Mobile - https://www.callofduty.com/mobile",
-    "251. Asphalt 9: Legends - https://www.asphaltlegends.com",
-    "252. Brawl Stars - https://supercell.com/en/games/brawlstars",
-    "253. Vainglory - https://www.vainglorygame.com",
-    "254. Clash of Kings - https://www.clashofkings.com",
-    "255. Plants vs Zombies - https://www.ea.com/games/plants-vs-zombies",
-    "256. Angry Birds - https://www.angrybirds.com",
-    "257. Words with Friends - https://www.zynga.com/games/words-with-friends",
-    "258. Trivia Crack - https://www.triviacrack.com",
-    "259. QuizUp - https://www.quizup.com",
-    "260. 8 Ball Pool - https://www.miniclip.com/games/8-ball-pool",
-    "261. Solitaire - https://www.solitaire.com",
-    "262. Mahjong - https://www.mahjong.com",
-    "263. Spades - https://www.spades.com",
-    "264. Hearts - https://www.hearts.com",
-    "265. Euchre - https://www.euchre.com",
-    "266. Gin Rummy - https://www.ginrummy.com",
-    "267. Rummy - https://www.rummy.com",
-    "268. Cribbage - https://www.cribbage.com",
-    "269. PokerStars - https://www.pokerstars.com",
-    "270. Blackjack - https://www.blackjack.com",
-    "271. Texas Hold'em - https://www.texasholdem.com",
-    "272. Solitaire Cash - https://www.solitairecash.com",
-    "273. Solitaire TriPeaks - https://www.solitairetripeaks.com",
-    "274. Jackpot Solitaire - https://www.jackpotsolitaire.com",
-    "275. Card Party - https://www.cardparty.com",
-    "276. Spades Royale - https://www.spadesroyale.com",
-    "277. Big Fish Games - https://www.bigfishgames.com",
-    "278. Farm Heroes Saga - https://king.com/games/farm-heroes-saga",
-    "279. Pet Rescue Saga - https://king.com/games/pet-rescue-saga",
-    "280. Pyramid Solitaire Saga - https://king.com/games/pyramid-solitaire-saga",
-    "281. Bubble Witch 3 Saga - https://king.com/games/bubble-witch-3-saga",
-    "282. Candy Crush Soda Saga - https://king.com/games/candy-crush-soda-saga",
-    "283. Wordscapes - https://www.wordscapes.com",
-    "284. Scrabble GO - https://www.scrabblego.com",
-    "285. Words with Friends 2 - https://www.zynga.com/games/words-with-friends-2",
-    "286. Word Cookies - https://www.bitmango.com/games/word-cookies",
-    "287. Word Crossy - https://www.bitmango.com/games/word-crossy",
-    "288. Word Crush - https://www.bitmango.com/games/word-crush",
-    "289. Word Pop - https://www.bitmango.com/games/word-pop",
-    "290. Super Sudoku - https://www.sudoku.com/super-sudoku",
-    "291. Sudoku 2 - https://www.sudoku.com/sudoku-2",
-    "292. Daily Sudoku - https://www.sudoku.com/daily-sudoku",
-    "293. KenKen - https://www.kenken.com",
-    "294. Kakuro - https://www.kakuro.com",
-    "295. Nonogram - https://www.nonogram.com",
-    "296. Jigsaw Puzzle - https://www.jigsawpuzzle.com",
-    "297. Hidden Object - https://www.hiddenobject.com",
-    "298. Solitaire Solitaire - https://www.solitaire-solitaire.com",
-    "299. Spider Solitaire - https://www.spidersolitaire.com",
-    "300. FreeCell Solitaire - https://www.freecellsolitaire.com"
-]
-
-# Saving the 201-300 games list to a ht,l file
-file_path = "/mnt/data/games_201_to_300.html"
-
-with open(file_path, "w") as file:
-    for game in games_201_300:
-        file.write(game + "\n")
-
-file_path  # Returning the file path for downloading
 <!DOCTYPE html>
 <html lang="el">
 <head>
   <meta charset="UTF-8">
-  <title>Idle Παιχνίδια #201-300</title>
+  <title>Idle Roblox Παιχνίδια - Χωρίς Robux</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background: #111;
       color: #eee;
-      margin: 0;
-      padding: 20px;
+      font-family: sans-serif;
+      padding: 30px;
     }
     h1 {
+      color: #00ffcc;
       text-align: center;
-      color: #00ff99;
     }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin: 20px 0;
-      font-size: 16px;
-      border-radius: 5px;
-      border: none;
+    ul {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: auto;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-    }
-    .game {
+    li {
       background: #222;
-      border: 1px solid #333;
+      margin: 10px 0;
       padding: 15px;
       border-radius: 10px;
-      transition: transform 0.2s;
+      border: 1px solid #333;
     }
-    .game:hover {
-      transform: scale(1.05);
-      background: #1e1e1e;
-    }
-    .number {
-      color: #888;
-      font-size: 0.9em;
-    }
-    .title {
-      color: #fff;
-      font-weight: bold;
-      margin: 5px 0;
-    }
-    .title a {
+    a {
       color: #00ccff;
       text-decoration: none;
+      font-weight: bold;
     }
-    .title a:hover {
+    a:hover {
       text-decoration: underline;
+    }
+    .desc {
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
-  <h1>Idle Παιχνίδια #201 - 300</h1>
-  <input type="text" id="search" placeholder="Αναζήτηση παιχνιδιού...">
-  <div class="grid" id="gameGrid">
-    <!-- 100 παιχνίδια με τίτλους και links -->
-    
-    <!-- Δημιουργήθηκε αυτόματα -->
-    
-    <!-- Example loop output -->
-    <!-- Replace the following block with actual list of 100 games from 201 to 300 -->
-    
-    <!-- This part is auto-generated for brevity -->
-    
-    
-    <!-- Παράδειγμα μόνο μερικά για τώρα, επεκτείνεται μέχρι #300 -->
-    
-    
-    
-    <!-- 100 τίτλοι -->
-    
-    
-    <!-- Auto-generated HTML -->
-    
-    <!-- Start -->
-    
-    <!-- Αντικατέστησε παρακάτω με πραγματικά δεδομένα -->
-    
-    
-    <!-- Εδώ βάζουμε όλα τα idle games από 201 έως 300 -->
-    <!-- Για παράδειγμα -->
-    <!-- Generated through JavaScript below -->
-
-  </div>
-
-  <script>
-    const searchInput = document.getElementById('search');
-    const gameGrid = document.getElementById('gameGrid');
-
-    const games = [
-      { number: 201, title: "AdVenture Capitalist", url: "https://store.steampowered.com/app/346900/AdVenture_Capitalist/" },
-      { number: 202, title: "Cookie Clicker", url: "https://orteil.dashnet.org/cookieclicker/" },
-      { number: 203, title: "Realm Grinder", url: "https://store.steampowered.com/app/610980/Realm_Grinder/" },
-      { number: 204, title: "Idle Miner Tycoon", url: "https://play.google.com/store/apps/details?id=com.fluffyfairygames.idleminertycoon" },
-      { number: 205, title: "Clicker Heroes", url: "https://store.steampowered.com/app/363970/Clicker_Heroes/" },
-      // Προσθέτω εικονικά δεδομένα για τα υπόλοιπα
-    ];
-
-    for (let i = 206; i <= 300; i++) {
-      games.push({
-        number: i,
-        title: `Idle Game #${i}`,
-        url: `#`
-      });
-    }
-
-    games.forEach(game => {
-      const div = document.createElement('div');
-      div.className = 'game';
-      div.innerHTML = `
-        <div class="number">#${game.number}</div>
-        <div class="title"><a href="${game.url}" target="_blank">${game.title}</a></div>
-      `;
-      gameGrid.appendChild(div);
-    });
-
-    searchInput.addEventListener('input', function () {
-      const filter = searchInput.value.toLowerCase();
-      const gameCards = gameGrid.getElementsByClassName('game');
-      for (let i = 0; i < gameCards.length; i++) {
-        const title = gameCards[i].querySelector('.title').innerText.toLowerCase();
-        gameCards[i].style.display = title.includes(filter) ? '' : 'none';
-      }
-    });
-  </script>
+  <h1>⚡ 10 Idle Roblox Παιχνίδια (Free & AFK)</h1>
+  <ul>
+    <li>
+      <a href="https://www.roblox.com/games/6688325284/Button-Simulator-X" target="_blank">Button Simulator X</a>
+      <div class="desc">Πατάς κουμπί -> auto upgrades</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/8750997647/Tapping-Legends-X" target="_blank">Tapping Legends X</a>
+      <div class="desc">Click -> pets -> auto gameplay</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/914010731/Clicker-Simulator" target="_blank">Clicker Simulator</a>
+      <div class="desc">Ξεκινάς με click, μετά γίνεται idle</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/7341598765/Get-Huge-Simulator" target="_blank">Get Huge Simulator</a>
+      <div class="desc">Απλό, idle-style muscle clicker</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/9281034294/Rebirth-Champions-X" target="_blank">Rebirth Champions X</a>
+      <div class="desc">Κλασικό idle + rebirths</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/6942619611/Strongman-Simulator" target="_blank">Strongman Simulator</a>
+      <div class="desc">Idle AFK gameplay με αντικείμενα</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/962211004/Weight-Lifting-Simulator-3" target="_blank">Weight Lifting Simulator 3</a>
+      <div class="desc">Παλαιότερο idle style παιχνίδι</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/920587237/Energy-Clickers" target="_blank">Energy Clickers</a>
+      <div class="desc">Click για ενέργεια → μετά auto</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/13960315295/AFK-Tycoon" target="_blank">AFK Tycoon</a>
+      <div class="desc">Παίζει τελείως μόνο του! 😴</div>
+    </li>
+    <li>
+      <a href="https://www.roblox.com/games/8962734504/Idle-Heroes-Simulator" target="_blank">Idle Heroes Simulator</a>
+      <div class="desc">Ήρωες πολεμάνε χωρίς input</div>
+    </li>
+  </ul>
 </body>
 </html>
-     
+
